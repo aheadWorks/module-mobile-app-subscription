@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="aheadworks" translate="label" sortOrder="300">
+            <label>Aheadworks Extensions</label>
+        </tab>
+        <section id="aw_mac" translate="label" type="text" sortOrder="145" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="aw_mac_setting" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="live_token_value" translate="label" type="obscure" sortOrder="40" showInDefault="1">
+                    <label>Live token</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    <comment><![CDATA[For access to production mode]]></comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

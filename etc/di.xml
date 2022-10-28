@@ -1,0 +1,98 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="Aheadworks\MobileAppSubscription\Api\TokenGeneratorInterface"
+                type="Aheadworks\MobileAppSubscription\Model\Service\TokenGenerator"/>
+    <preference for="Aheadworks\MobileAppSubscription\Api\Data\IntegrationInterface"
+                type="Aheadworks\MobileAppSubscription\Model\Integration"/>
+
+    <preference for="Aheadworks\MobileAppSubscription\Api\Data\BillingPortalRequestInterface"
+                type="Aheadworks\MobileAppSubscription\Model\BillingPortal\Api\Request\BillingPortalRequest"/>
+    <preference for="Aheadworks\MobileAppSubscription\Api\Data\BillingPortalResponseInterface"
+                type="Aheadworks\MobileAppSubscription\Model\BillingPortal\Api\Response\BillingPortalResponse"/>
+
+    <preference for="Aheadworks\MobileAppSubscription\Api\Data\SubscriptionInterface"
+                type="Aheadworks\MobileAppSubscription\Model\Subscription"/>
+
+    <preference for="Aheadworks\MobileAppSubscription\Api\SubscriptionManagerInterface"
+                type="Aheadworks\MobileAppSubscription\Model\SubscriptionManager"/>
+
+    <virtualType name="Aheadworks\MobileAppSubscription\Model\TokenResources" type="Magento\Framework\DataObject">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="resources" xsi:type="array">
+                    <item name="0" xsi:type="string">Magento_Backend::admin</item>
+                    <item name="1" xsi:type="string">Aheadworks_MobileAppConnector::general</item>
+                    <item name="2" xsi:type="string">Aheadworks_MobileAppConnector::app_overview</item>
+                    <item name="3" xsi:type="string">Aheadworks_MobileAppConnector::app_preferences</item>
+                    <item name="4" xsi:type="string">Magento_Sales::sales</item>
+                    <item name="5" xsi:type="string">Magento_Sales::sales_operation</item>
+                    <item name="6" xsi:type="string">Magento_Sales::sales_order</item>
+                    <item name="7" xsi:type="string">Magento_Sales::actions</item>
+                    <item name="8" xsi:type="string">Magento_Sales::actions_view</item>
+                    <item name="9" xsi:type="string">Magento_Paypal::billing_agreement</item>
+                    <item name="10" xsi:type="string">Magento_Paypal::billing_agreement_actions</item>
+                    <item name="11" xsi:type="string">Magento_Paypal::billing_agreement_actions_view</item>
+                    <item name="12" xsi:type="string">Magento_Paypal::use</item>
+                    <item name="13" xsi:type="string">Magento_Catalog::catalog</item>
+                    <item name="14" xsi:type="string">Magento_Catalog::catalog_inventory</item>
+                    <item name="15" xsi:type="string">Magento_Catalog::products</item>
+                    <item name="16" xsi:type="string">Magento_Catalog::categories</item>
+                    <item name="17" xsi:type="string">Magento_Customer::customer</item>
+                    <item name="18" xsi:type="string">Magento_LoginAsCustomer::login</item>
+                    <item name="19" xsi:type="string">Magento_Cart::cart</item>
+                    <item name="20" xsi:type="string">Magento_Cart::manage</item>
+                    <item name="21" xsi:type="string">Magento_Backend::myaccount</item>
+                    <item name="22" xsi:type="string">Magento_Backend::marketing</item>
+                    <item name="23" xsi:type="string">Magento_Backend::marketing_user_content</item>
+                    <item name="24" xsi:type="string">Magento_Review::reviews_all</item>
+                    <item name="25" xsi:type="string">Magento_Backend::content</item>
+                    <item name="26" xsi:type="string">Magento_Backend::content_elements</item>
+                    <item name="27" xsi:type="string">Magento_Cms::page</item>
+                    <item name="28" xsi:type="string">Magento_Catalog::attributes_attributes</item>
+                    <item name="29" xsi:type="string">Magento_Review::reviews_all</item>
+                    <item name="30" xsi:type="string">Magento_Review::ratings</item>
+                    <item name="31" xsi:type="string">Magento_Backend::store</item>
+                    <item name="32" xsi:type="string">Magento_Customer::group</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Aheadworks\MobileAppSubscription\Model\Service\GeneratorProcess">
+        <arguments>
+            <argument name="tokenResources" xsi:type="object">Aheadworks\MobileAppSubscription\Model\TokenResources</argument>
+        </arguments>
+    </type>
+    <type name="Aheadworks\MobileAppSubscription\Console\UpdateIntegrationResources">
+        <arguments>
+            <argument name="tokenResources" xsi:type="object">Aheadworks\MobileAppSubscription\Model\TokenResources</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="updateIntegrationResources" xsi:type="object">Aheadworks\MobileAppSubscription\Console\UpdateIntegrationResources</item>
+                <item name="awMobileAppSubscriptionIntegrationLaunch" xsi:type="object">
+                    Aheadworks\MobileAppSubscription\Console\Integration\Launch
+                </item>
+                <item name="awMobileAppSubscriptionIntegrationDelete" xsi:type="object">
+                    Aheadworks\MobileAppSubscription\Console\Integration\Delete
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Aheadworks\MobileAppSubscription\Model\BillingPortal\Api\Response\BillingPortalResponse">
+        <arguments>
+            <argument name="activeSubscriptionStatuses" xsi:type="array">
+                <item name="trial" xsi:type="array">
+                    <item name="0" xsi:type="const">Aheadworks\MobileAppSubscription\Api\Data\BillingPortalResponseInterface::TRIAL_STATUS_ACTIVE</item>
+                </item>
+                <item name="live" xsi:type="array">
+                    <item name="0" xsi:type="const">Aheadworks\MobileAppSubscription\Api\Data\BillingPortalResponseInterface::LIVE_STATUS_ACTIVE</item>
+                    <item name="1" xsi:type="const">Aheadworks\MobileAppSubscription\Api\Data\BillingPortalResponseInterface::LIVE_STATUS_TRIAL</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+</config>

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="catalog_category_prepare_save">
+        <observer name="awBuildify" instance="Aheadworks\Buildify\Observer\PrepareFormData\Entity\Category"/>
+    </event>
+    <event name="admin_system_config_changed_section_aw_mac">
+        <observer name="aw_mac_system_config_changed" instance="Aheadworks\MobileAppSubscription\Observer\SubscriptionConfig"/>
+    </event>
+</config>
