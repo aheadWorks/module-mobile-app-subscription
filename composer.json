@@ -1,8 +1,8 @@
 {
-    "name": "aheadworks/module-mobile-app-subsciption",
+    "name": "aheadworks/module-mobile-app-subscription",
     "description": "N/A",
     "type": "magento2-module",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "license": [
         "proprietary"
     ],
